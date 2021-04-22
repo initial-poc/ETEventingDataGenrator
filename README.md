@@ -1,3 +1,13 @@
+# How to create JAR on Google Cloud:
+* Clone maven project using below command
+```
+git clone https://github.com/initial-poc/ETEventingDataGenrator.git
+```
+* Build the code using below command
+```
+mvn clean package
+```
+
 # How to execute JAR :
 ### 1. Open Command Prompt
 ### 2. Open location of ETEventingDataGenrator.jar file
@@ -7,7 +17,8 @@
 ### 5. After processing, program will show processed file name with location.
 
 
-# Files Description
+# Files Description 
+### This program is written in standard java and CSVDataGenerator is the main file from execution starts.
 ### 1. **CSVDataGenerator.java** : Below are the step by step explanation of logic of this file : 
 * Get total number of generated records from command line
 * Set various variables like : 
