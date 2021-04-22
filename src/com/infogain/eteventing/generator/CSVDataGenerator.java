@@ -18,6 +18,7 @@ public class CSVDataGenerator {
 	public static void main(String[] args) throws IOException {
 		System.out.println("============== ET EVENTING DATA GENERATOR ==============");
 		Scanner inputData = null;
+		FileWriter csvWriter = null;
 		try {
 			/** 1. Get Input from user */
 		    inputData = new Scanner(System.in);
@@ -34,7 +35,7 @@ public class CSVDataGenerator {
 			String fileName = getFileName(inputRecords);
 			
 			// Create CSV File set header data
-			FileWriter csvWriter = new FileWriter(fileName);
+			csvWriter = new FileWriter(fileName);
 			csvWriter.append(Constant.CSV_HEADER);
 			csvWriter.append(Constant.NEWLINE);
 
@@ -56,9 +57,7 @@ public class CSVDataGenerator {
 			for(CSVDataDTO data : dataKeeper) {
 				writeInCSV(data,csvWriter,locatorVersionMap);
 			}
-	
-			csvWriter.flush();
-			csvWriter.close();
+
 			File csvFile = new File(fileName);
 			System.out.println("Processed file : " + csvFile.getAbsolutePath());
 		} catch(Exception e) {
@@ -66,6 +65,8 @@ public class CSVDataGenerator {
 		} finally {
 		    if(inputData!=null)
 		    	inputData.close();
+			csvWriter.flush();
+			csvWriter.close();
 		}
 	}
 
