@@ -1,0 +1,27 @@
+spanner:
+  instance:
+    id: instance-1
+  database:
+    id: database-1
+  project:
+    id: sab-ors-poc-sbx-01-9096
+
+GOOGLE_APPLICATION_CREDENTIALS: ./cred.json
+
+max:
+  version:
+    replicate: 3
+  records:
+    file: 600
+  time:
+    run:
+      process: 1000000  # in sec
+
+
+scheduler:
+  pool:
+    size: 3
+  delay:
+    interval: 60   # In sec
+
+
