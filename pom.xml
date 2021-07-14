@@ -90,21 +90,29 @@
         </dependency>
     </dependencies>
 
-    <build>
+     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <systemPropertyVariables>
+                        <ngp.service.name>tmg-subscriber-service></ngp.service.name>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
+
+            <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.8.0</version><configuration><release>11</release></configuration></plugin>
+
+
+
+            <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId><configuration><mainClass>com.infogain.et.event.EtEventingDataGenratorApplication</mainClass></configuration><executions><execution><goals><goal>repackage</goal></goals></execution></executions></plugin>
+
         </plugins>
     </build>
+
 </project>
