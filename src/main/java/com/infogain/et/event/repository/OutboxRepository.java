@@ -46,4 +46,28 @@ public class OutboxRepository {
         log.info("Time taken:: {} to persist Records of size:: {}", started.stop(), outboxEntityList.size());
 
     }
+    public void saveOutboxDataUSingMutation(OutboxEntity outboxEntity) {
+        log.info("saving data in database...");
+        List<Mutation> mutations = new ArrayList<>();
+         mutations.add(
+                Mutation.newInsertBuilder("OUTBOX")
+                        .set("locator")
+                        .to(outboxEntity.getLocator())
+                        .set("version")
+                        .to(outboxEntity.getVersion())
+                        .set("payload_type")
+                        .to(outboxEntity.getPayloadType())
+                        .set("created")
+                        .to(Value.COMMIT_TIMESTAMP)
+                        .set("payload")
+                        .to(outboxEntity.getPayload())
+                        .set("status")
+                        .to(outboxEntity.getStatus())
+                        .build());
+        var started = Stopwatch.createStarted();
+        databaseClient.write(mutations);
+
+        log.info("Time taken:: {} to persist Records", started.stop());
+
+    }
 }

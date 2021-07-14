@@ -20,7 +20,7 @@ max:
 
 scheduler:
   pool:
-    size: 3
+    size: 50
   delay:
     interval: 60   # In sec
 

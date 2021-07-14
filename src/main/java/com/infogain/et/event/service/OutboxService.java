@@ -26,4 +26,13 @@ public class OutboxService {
 
         log.info("saving data in database");
     }
+
+    public void saveOutbox(CSVDataDTO cSVDataDTOSet) {
+
+
+
+        outboxRepository.saveOutboxDataUSingMutation(cSVDataDTOSet.buildEntity());
+
+        log.info("saving data in database");
+    }
 }

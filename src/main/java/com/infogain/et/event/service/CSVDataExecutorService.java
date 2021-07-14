@@ -26,10 +26,14 @@ public class CSVDataExecutorService {
     private int delayInterval;
 
     public void processData(Set<CSVDataDTO> dtoSet) {
-        executorService.scheduleAtFixedRate(() -> {
-            log.info("Records:: {} sending to OutBox service to persist", dtoSet.size());
-            outboxService.saveOutbox(dtoSet);
-        }, 0, delayInterval, TimeUnit.SECONDS);
+        log.info("Records:: {} sending to OutBox service to persist", dtoSet.size());
+        for(CSVDataDTO dto : dtoSet) {
+            executorService.scheduleAtFixedRate(() -> {
+            //    log.info("Records:: {} sending to OutBox service to persist", dtoSet.size());
+                outboxService.saveOutbox(dtoSet);
+
+            }, 0, delayInterval, TimeUnit.SECONDS);
+        }
     }
 
 }
