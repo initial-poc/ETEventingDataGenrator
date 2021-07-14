@@ -1,9 +1,9 @@
 package com.infogain.et.event.repository;
 
-import com.google.cloud.Timestamp;
 import com.google.cloud.spanner.DatabaseClient;
 import com.google.cloud.spanner.Mutation;
 import com.google.cloud.spanner.Value;
+import com.google.common.base.Stopwatch;
 import com.infogain.et.event.entity.OutboxEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +23,9 @@ public class OutboxRepository {
 
 
     public void saveOutboxDataUSingMutation(Set<OutboxEntity> outboxEntityList) {
-
+        log.info("saving data in database...");
         List<Mutation> mutations = new ArrayList<>();
-        outboxEntityList.stream().forEach((outboxEntity) -> mutations.add(
+        outboxEntityList.forEach(outboxEntity -> mutations.add(
                 Mutation.newInsertBuilder("OUTBOX")
                         .set("locator")
                         .to(outboxEntity.getLocator())
@@ -40,9 +40,10 @@ public class OutboxRepository {
                         .set("status")
                         .to(outboxEntity.getStatus())
                         .build()));
-        Timestamp write = databaseClient.write(mutations);
+        var started = Stopwatch.createStarted();
+        databaseClient.write(mutations);
 
-        log.info("Time take to persist records of size:: {} is {}", outboxEntityList.size(), write.getSeconds());
+        log.info("Time taken:: {} to persist Records of size:: {}", started.stop(), outboxEntityList.size());
 
     }
 }

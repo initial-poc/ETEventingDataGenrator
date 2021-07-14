@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -29,31 +30,38 @@ public class TrafficGenerator {
     private static final String MAX_TPS = "Enter Number of TPS to be Processed : ";
     Random random = new Random();
     Object[] values = DataGeneratorUtility.ITERNARY_MAP.values().toArray();
-
-    @Value("${tps}")
+    @Autowired
+    ScheduledExecutorService scheduledExecutorService;
+    @Value("${tps:50}")
     private Integer maxTPS;
     @Value("${max.version.replicate:2}")
     private int maxVersionReplicate;
     @Value("${max.records.file:100}")
     private int inputRecordsSize;
-
     @Value("${max.time.run.process}")
     private int maxTimeToRunProcess;
     @Autowired
     private Serializer serializer;
 
-    public void process() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, InterruptedException, IOException {
+    public void process() {
 
-        //Get User Input for Record processing
+        inputRecordsSize = maxTPS * 2;
 
         long startTime = System.currentTimeMillis();
         long maxTimeInMilliSec = TimeUnit.SECONDS.toMillis(maxTimeToRunProcess);
-        while ((System.currentTimeMillis() - startTime) < maxTimeInMilliSec) {
+
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
             Set<CSVDataDTO> csvDataSet = this.populateCSV(inputRecordsSize, 1);
             String fileName = FileOPeration.getFileName(inputRecordsSize);
-            serializer.serializeDataToFile(csvDataSet, fileName);
-            processDataByTPS(csvDataSet, fileName, maxTPS);
-        }
+            try {
+                serializer.serializeDataToFile(csvDataSet, fileName);
+                processDataByTPS(csvDataSet, fileName, maxTPS);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     private Set<CSVDataDTO> populateCSV(int inputRecordsSize, int version) {
@@ -80,10 +88,10 @@ public class TrafficGenerator {
         for (int i = 1; i < maxVersionReplicate; i++) {
             serializer.processSetToChunksByTPS(csvDataSet, maxTPS);
             int versionCount = version.incrementAndGet();
-            csvDataSet.forEach(dto -> dto.setVersion(String.valueOf(versionCount))); //
-
+            csvDataSet.forEach(dto -> dto.setVersion(String.valueOf(versionCount)));
         }
     }
+
 
     private int getClientRequestByInfo(String reqInfo, Scanner scanner) {
         System.out.println(reqInfo);
