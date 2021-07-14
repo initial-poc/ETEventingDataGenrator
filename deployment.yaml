@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: et-traffice-generator-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: et-traffice-generator-pod
+  template:
+    metadata:
+      labels:
+        app: et-traffice-generator-pod
+    spec:
+      volumes:
+      - name: pnr-resequencer
+        secret:
+          secretName: pubsub-key    
+      containers:
+        - image: gcr.io/sab-ors-poc-sbx-01-9096/et-traffice-generator:latest
+          name: et-traffice-generator
+          volumeMounts:
+          - name: pnr-resequencer
+            mountPath: /var/secrets/google
+            readOnly: true
+          env:
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /var/secrets/google/key.json   
+      
+            
