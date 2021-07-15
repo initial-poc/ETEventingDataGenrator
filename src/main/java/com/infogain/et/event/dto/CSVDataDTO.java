@@ -24,7 +24,6 @@ public class CSVDataDTO {
         outboxEntity.setVersion(Long.parseLong(version));
         outboxEntity.setParentPnr(parent_locator);
         outboxEntity.setPayload(data);
-        outboxEntity.setPayloadType(payload_type);
         outboxEntity.setCreated(Timestamp.now());
         outboxEntity.setStatus(0);
 

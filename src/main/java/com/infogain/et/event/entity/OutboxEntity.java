@@ -12,7 +12,6 @@ import lombok.*;
 public class OutboxEntity {
     private String locator;
     private long version;
-    private String payloadType;
     private Timestamp created;
     private String payload;
     private long status;
