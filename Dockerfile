@@ -16,4 +16,5 @@ ARG jar_file=target/et-event-generator-1.0.0.jar
 COPY ${jar_file} et-event-generator-1.0.0.jar
 
 # run the jar file
-ENTRYPOINT ["java", "-jar", "-Dtps=50","et-event-generator-1.0.0.jar" ]
+#ENTRYPOINT ["java", "-jar", "-Dtps=50","et-event-generator-1.0.0.jar" ]
+ENTRYPOINT ["java", "-jar", "et-event-generator-1.0.0.jar" ]
