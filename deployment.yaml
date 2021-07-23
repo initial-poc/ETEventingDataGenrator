@@ -28,5 +28,8 @@ spec:
             value: /var/secrets/google/key.json
           - name: tps
             value: "50"
+          - name : max.data.limit
+            value: 100
+            
       
             

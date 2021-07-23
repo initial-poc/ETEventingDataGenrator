@@ -110,7 +110,7 @@
 
 
 
-            <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId><configuration><mainClass>com.infogain.et.event.EtEventingDataGenratorApplication</mainClass></configuration><executions><execution><goals><goal>repackage</goal></goals></execution></executions></plugin>
+            <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId><configuration><mainClass>com.infogain.et.tg.TrafficGeneratorApp</mainClass></configuration><executions><execution><goals><goal>repackage</goal></goals></execution></executions></plugin>
 
         </plugins>
     </build>

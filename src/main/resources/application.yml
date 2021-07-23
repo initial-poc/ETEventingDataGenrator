@@ -11,17 +11,16 @@ GOOGLE_APPLICATION_CREDENTIALS: ./cred.json
 max:
   version:
     replicate: 3
-  records:
-    file: 600
-  time:
-    run:
-      process: 1000000  # in sec
-
+  data:
+    limit: 70
 
 scheduler:
   pool:
     size: 50
   delay:
     interval: 60   # In sec
+
+
+tps: 50
 
 
