@@ -27,7 +27,7 @@ spec:
           - name: GOOGLE_APPLICATION_CREDENTIALS
             value: /var/secrets/google/key.json
           - name: tps
-            value: "100"
+            value: "200"
           - name : max.data.limit
             value: "10000"
             
