@@ -29,7 +29,7 @@ spec:
           - name: tps
             value: "200"
           - name : max.data.limit
-            value: "10000"
+            value: "2500000"
             
       
             
