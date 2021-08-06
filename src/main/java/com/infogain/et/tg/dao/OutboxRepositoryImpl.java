@@ -48,7 +48,8 @@ public class OutboxRepositoryImpl implements OutboxRepository {
 
         Stopwatch started = Stopwatch.createStarted();
         mutations.add(
-                Mutation.newInsertBuilder(EtConstants.OUTBOX)
+               // Mutation.newInsertBuilder(EtConstants.OUTBOX)
+                Mutation.newInsertBuilder("OUTBOX_300_MOCK")
                         .set(EtConstants.LOCATOR)
                         .to(outboxEntity.getLocator())
                         .set(EtConstants.VERSION)
