@@ -65,7 +65,7 @@ inputRecordsSize=maxTPS*2;
             dataSet.add(OutboxModel.builder().locator(DataGeneratorUtil.getRandomPNRId()).version(String.valueOf(version))
                     .version(String.valueOf(version)).data(
                             (EtConstants.DATA.substring(0, EtConstants.DATA.length() - 1) + EtConstants.COMMA + itineraryMapArray[random.nextInt(itineraryMapArray.length)]
-                                    + EtConstants.DATA.charAt(EtConstants.DATA.length() - 1))+EtConstants.DATA).build());
+                                    + EtConstants.DATA.charAt(EtConstants.DATA.length() - 1))).build());
         return dataSet;
     }
 
