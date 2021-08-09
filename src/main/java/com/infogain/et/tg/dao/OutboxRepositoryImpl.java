@@ -26,7 +26,7 @@ public class OutboxRepositoryImpl implements OutboxRepository {
         List<Mutation> mutations = new ArrayList<>();
 
         outboxEntitySet.forEach(outboxEntity -> mutations.add(
-                Mutation.newInsertBuilder("OUTBOX_BATCH_PUBLISH")
+                Mutation.newInsertBuilder("OUTBOX_SINGLE_VERSION")
                         .set(EtConstants.LOCATOR)
                         .to(outboxEntity.getLocator())
                         .set(EtConstants.VERSION)
@@ -49,7 +49,7 @@ public class OutboxRepositoryImpl implements OutboxRepository {
         Stopwatch started = Stopwatch.createStarted();
         mutations.add(
                // Mutation.newInsertBuilder(EtConstants.OUTBOX)
-                Mutation.newInsertBuilder("OUTBOX_BATCH_PUBLISH")
+                Mutation.newInsertBuilder("OUTBOX_SINGLE_VERSION")
                         .set(EtConstants.LOCATOR)
                         .to(outboxEntity.getLocator())
                         .set(EtConstants.VERSION)

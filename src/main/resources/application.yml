@@ -10,7 +10,7 @@ GOOGLE_APPLICATION_CREDENTIALS: ./cred.json
 
 max:
   version:
-    replicate: 3
+    replicate: 2
   data:
     limit: 70
 
