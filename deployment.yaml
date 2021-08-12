@@ -30,6 +30,8 @@ spec:
             value: "300"
           - name : max.data.limit
             value: "2500000"
+          - name: table.name
+            value: "OUTBOX_WITH_AUTO_PURGE"          
             
       
             
