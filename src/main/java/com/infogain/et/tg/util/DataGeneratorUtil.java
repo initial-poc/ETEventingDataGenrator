@@ -4,8 +4,11 @@ import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.zip.CRC32;
 
 public class DataGeneratorUtil {
+
+    public static final int NO_OF_SHARDS = 100;
 
     public static final Map<Integer, String> ITERNARY_MAP = Map.of(
             1, "\"itinerary\" : \"LHR-DEL\"",
@@ -29,4 +32,13 @@ public class DataGeneratorUtil {
         Random random = new Random();
         return NanoIdUtils.randomNanoId(random, alphaDigitArray, 6);
     }
+
+    public static Long getPnrShardId(String pnrId) {
+        CRC32 hash = new CRC32();
+        String data = pnrId + System.currentTimeMillis();
+        hash.update(data.getBytes());
+        long value = hash.getValue();
+        return value % NO_OF_SHARDS;
+    }
+
 }

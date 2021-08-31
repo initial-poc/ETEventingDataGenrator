@@ -20,4 +20,5 @@ public class OutboxEntity {
     private Timestamp updated;
     private long processing_time_millis;
     private String parentPnr;
+    private Long pnrEventShardId;
 }
