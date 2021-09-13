@@ -62,13 +62,14 @@ public class TrafficGeneratorService {
     private Set<OutboxModel> populateDataByRecordSize(int inputRecordsSize, int version) {
         Set<OutboxModel> dataSet = new HashSet<>();
         String randomPNRId = "";
-        for (var i = 0; i < inputRecordsSize; i++)
+        for (var i = 0; i < inputRecordsSize; i++) {
 
             randomPNRId = DataGeneratorUtil.getRandomPNRId();
-        dataSet.add(OutboxModel.builder().locator(randomPNRId).version(String.valueOf(version))
-                .version(String.valueOf(version)).data(
-                        (EtConstants.DATA.substring(0, EtConstants.DATA.length() - 1) + EtConstants.COMMA + itineraryMapArray[random.nextInt(itineraryMapArray.length)]
-                                + EtConstants.DATA.charAt(EtConstants.DATA.length() - 1))+EtConstants.DATA).pnrEventShardId(DataGeneratorUtil.getPnrShardId(randomPNRId)).build());
+            dataSet.add(OutboxModel.builder().locator(randomPNRId).version(String.valueOf(version))
+                    .version(String.valueOf(version)).data(
+                            (EtConstants.DATA.substring(0, EtConstants.DATA.length() - 1) + EtConstants.COMMA + itineraryMapArray[random.nextInt(itineraryMapArray.length)]
+                                    + EtConstants.DATA.charAt(EtConstants.DATA.length() - 1)) + EtConstants.DATA).pnrEventShardId(DataGeneratorUtil.getPnrShardId(randomPNRId)).build());
+        }
         return dataSet;
     }
 

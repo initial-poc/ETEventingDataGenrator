@@ -15,7 +15,7 @@ public class OutboxModel {
     String data;
     String payload_type;
     String status;
-    Long pnrEventShardId;
+    long pnrEventShardId;
 
 
     @SneakyThrows

@@ -33,7 +33,7 @@ public class DataGeneratorUtil {
         return NanoIdUtils.randomNanoId(random, alphaDigitArray, 6);
     }
 
-    public static Long getPnrShardId(String pnrId) {
+    public static long getPnrShardId(String pnrId) {
         CRC32 hash = new CRC32();
         String data = pnrId + System.currentTimeMillis();
         hash.update(data.getBytes());

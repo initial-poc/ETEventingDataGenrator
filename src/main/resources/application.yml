@@ -21,6 +21,6 @@ scheduler:
     interval: 60   # In sec
 
 
-tps: 50
+tps: 300
 
 
