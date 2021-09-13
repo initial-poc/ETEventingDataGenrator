@@ -17,7 +17,7 @@ spec:
         secret:
           secretName: pubsub-key    
       containers:
-        - image: gcr.io/sab-ors-poc-sbx-01-9096/et-traffice-generator:latest
+        - image: gcr.io/sab-order-service-sbx-7006/et-traffice-generator:latest
           name: et-traffice-generator
           volumeMounts:
           - name: pnr-resequencer
