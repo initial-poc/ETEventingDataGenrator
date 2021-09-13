@@ -62,6 +62,7 @@ public class OutboxRepositoryImpl implements OutboxRepository {
                         .to(outboxEntity.getPayload())
                         .set(EtConstants.STATUS)
                         .to(outboxEntity.getStatus())
+                        .set(EtConstants.SHARD).to(outboxEntity.getPnrEventShardId())
                         .build());
 
         databaseClient.write(mutations);

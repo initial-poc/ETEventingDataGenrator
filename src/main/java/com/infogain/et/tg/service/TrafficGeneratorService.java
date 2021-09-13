@@ -65,10 +65,12 @@ public class TrafficGeneratorService {
         for (var i = 0; i < inputRecordsSize; i++) {
 
             randomPNRId = DataGeneratorUtil.getRandomPNRId();
+            long pnrShardId = DataGeneratorUtil.getPnrShardId(randomPNRId);
+
             dataSet.add(OutboxModel.builder().locator(randomPNRId).version(String.valueOf(version))
                     .version(String.valueOf(version)).data(
                             (EtConstants.DATA.substring(0, EtConstants.DATA.length() - 1) + EtConstants.COMMA + itineraryMapArray[random.nextInt(itineraryMapArray.length)]
-                                    + EtConstants.DATA.charAt(EtConstants.DATA.length() - 1)) + EtConstants.DATA).pnrEventShardId(DataGeneratorUtil.getPnrShardId(randomPNRId)).build());
+                                    + EtConstants.DATA.charAt(EtConstants.DATA.length() - 1)) + EtConstants.DATA).pnrEventShardId(pnrShardId).build());
         }
         return dataSet;
     }
