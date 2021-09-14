@@ -8,7 +8,7 @@ import java.util.zip.CRC32;
 
 public class DataGeneratorUtil {
 
-    public static final int NO_OF_SHARDS = 100;
+    public static final int NO_OF_SHARDS = 4;
 
     public static final Map<Integer, String> ITERNARY_MAP = Map.of(
             1, "\"itinerary\" : \"LHR-DEL\"",
