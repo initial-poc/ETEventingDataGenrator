@@ -4,7 +4,7 @@ spanner:
   database:
     id: database-1
   project:
-    id: sab-ors-poc-sbx-01-9096
+    id: sab-order-service-sbx-7006
 
 GOOGLE_APPLICATION_CREDENTIALS: ./cred.json
 
