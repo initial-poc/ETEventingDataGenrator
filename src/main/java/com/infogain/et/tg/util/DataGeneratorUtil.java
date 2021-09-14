@@ -35,7 +35,7 @@ public class DataGeneratorUtil {
 
     public static long getPnrShardId(String pnrId) {
         CRC32 hash = new CRC32();
-        String data = pnrId + System.currentTimeMillis();
+        String data = pnrId ;//+ System.currentTimeMillis();
         hash.update(data.getBytes());
         long value = hash.getValue();
         return value % NO_OF_SHARDS;
