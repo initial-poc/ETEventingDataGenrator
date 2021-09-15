@@ -51,7 +51,7 @@ public class OutboxRepositoryImpl implements OutboxRepository {
         Stopwatch started = Stopwatch.createStarted();
         mutations.add(
                // Mutation.newInsertBuilder(EtConstants.OUTBOX)
-                Mutation.newInsertBuilder(tableName)
+                Mutation.newInsertBuilder(tableName+"_"+outboxEntity.getPnrEventShardId())
                         .set(EtConstants.LOCATOR)
                         .to(outboxEntity.getLocator())
                         .set(EtConstants.VERSION)
