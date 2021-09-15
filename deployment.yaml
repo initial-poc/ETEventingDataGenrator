@@ -31,7 +31,7 @@ spec:
           - name : max.data.limit
             value: "2500000"
           - name: table.name
-            value: "OUTBOX_WITH_AUTO_PURGE_WITH_NODE_3"          
+            value: "OUTBOX_2"          
             
       
             
