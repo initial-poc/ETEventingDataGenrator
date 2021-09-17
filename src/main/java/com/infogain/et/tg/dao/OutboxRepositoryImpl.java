@@ -5,6 +5,7 @@ import com.google.cloud.spanner.Mutation;
 import com.google.cloud.spanner.Value;
 import com.google.common.base.Stopwatch;
 import com.infogain.et.tg.entity.OutboxEntity;
+import com.infogain.et.tg.util.DataGeneratorUtil;
 import com.infogain.et.tg.util.EtConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -63,6 +64,7 @@ public class OutboxRepositoryImpl implements OutboxRepository {
                         .set(EtConstants.STATUS)
                         .to(outboxEntity.getStatus())
                         .set(EtConstants.SHARD).to(outboxEntity.getPnrEventShardId())
+                        .set(EtConstants.PNR_ID).to(DataGeneratorUtil.getRandomUniqueId())
                         .build());
 
         databaseClient.write(mutations);

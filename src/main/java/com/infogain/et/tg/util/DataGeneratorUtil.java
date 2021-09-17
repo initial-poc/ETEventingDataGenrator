@@ -9,7 +9,7 @@ import java.util.zip.CRC32;
 public class DataGeneratorUtil {
 
     public static final int NO_OF_SHARDS = 4;
-
+public static final Random RANDOM = new Random();
     public static final Map<Integer, String> ITERNARY_MAP = Map.of(
             1, "\"itinerary\" : \"LHR-DEL\"",
             2, "\"teleType\" : \"Business\"",
@@ -19,6 +19,7 @@ public class DataGeneratorUtil {
             6, "\"itinerary\" : \"LHR-DEL\", \"eticket\" :  \"234246\", \"teleType :  \"Business\""
     );
     static char[] alphaDigitArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+   private  static final char[] DIGIT_ARRAY = "0123456789".toCharArray();
 
     private DataGeneratorUtil() {
     }
@@ -39,6 +40,10 @@ public class DataGeneratorUtil {
         hash.update(data.getBytes());
         long value = hash.getValue();
         return value % NO_OF_SHARDS;
+    }
+
+    public static String getRandomUniqueId() {
+        return NanoIdUtils.randomNanoId(RANDOM, DIGIT_ARRAY, 10);
     }
 
 }
